@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><%= listing.title %> - WanderLust</title>
+<style>
+  body { font-family: 'Arial', sans-serif; background: #f7f7f7; margin:0; padding:0; }
+  nav, footer { background: #fff; padding: 15px 30px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+  nav .brand, nav ul li a, footer a { text-decoration: none; color: #333; font-weight: bold; transition: 0.3s; }
+  nav .brand:hover, nav ul li a:hover, footer a:hover { color: #007bff; }
+  nav ul { display: flex; gap: 20px; list-style:none; margin:0; padding:0; }
+  .container { max-width: 800px; margin: 50px auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+  .listing-img { width:100%; height:400px; object-fit:cover; border-radius:12px; transition: transform 0.3s; }
+  .listing-img:hover { transform: scale(1.05); }
+  h2 { color:#333; margin-top:20px; }
+  p { color:#555; line-height:1.6; }
+  .price { color:#007bff; font-weight:bold; font-size:1.2rem; margin-top:10px; }
+  .actions a { text-decoration:none; padding:10px 15px; border-radius:6px; background:#007bff; color:#fff; margin-right:10px; transition:0.3s; }
+  .actions a:hover { background:#0056b3; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+  <a href="/" class="brand">WanderLust</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/listings/new">New Listing</a></li>
+  </ul>
+</nav>
+
+<!-- Listing Details -->
+<div class="container">
+  <img src="<%= listing.image.url || listing.image %>" alt="<%= listing.title %>" class="listing-img">
+  <h2><%= listing.title %></h2>
+  <p><%= listing.description %></p>
+  <p class="price">₹<%= listing.price %></p>
+  <p><strong>Location:</strong> <%= listing.location %>, <%= listing.country %></p>
+
+  <div class="actions">
+    <a href="/listings/<%= listing._id %>/edit">Edit</a>
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" style="display:inline;">
+      <button type="submit" style="padding:10px 15px; border:none; border-radius:6px; background:#dc3545; color:#fff; cursor:pointer; transition:0.3s;">Delete</button>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  &copy; 2025 WanderLust | <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>

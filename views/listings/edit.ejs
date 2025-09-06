@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Listing - <%= listing.title %></title>
+<style>
+  body { font-family: 'Arial', sans-serif; background:#f7f7f7; margin:0; padding:0; }
+  nav, footer { background:#fff; padding:15px 30px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+  nav .brand, nav ul li a, footer a { text-decoration:none; color:#333; font-weight:bold; transition:0.3s;}
+  nav .brand:hover, nav ul li a:hover, footer a:hover { color:#007bff; }
+  nav ul { display:flex; gap:20px; list-style:none; margin:0; padding:0; }
+  .container { max-width:600px; margin:50px auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+  h2 { text-align:center; color:#333; }
+  form { display:flex; flex-direction:column; gap:15px; }
+  label { font-weight:bold; color:#555; }
+  input[type="text"], input[type="number"], textarea { padding:10px; border-radius:6px; border:1px solid #ccc; width:100%; transition:0.3s; }
+  input[type="text"]:focus, input[type="number"]:focus, textarea:focus { border-color:#007bff; outline:none; box-shadow:0 0 5px rgba(0,123,255,0.3);}
+  button { padding:12px; border:none; border-radius:6px; background:#007bff; color:#fff; font-weight:bold; cursor:pointer; transition:0.3s; }
+  button:hover { background:#0056b3; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="brand">WanderLust</a>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/listings/new">New Listing</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <h2>Edit Listing</h2>
+  <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="listing[title]" id="title" value="<%= listing.title %>" required>
+    
+    <label for="image">Image URL:</label>
+    <input type="text" name="listing[image]" id="image" value="<%= listing.image.url || listing.image %>" required>
+    
+    <label for="description">Description:</label>
+    <textarea name="listing[description]" id="description" required><%= listing.description %></textarea>
+    
+    <label for="price">Price (INR):</label>
+    <input type="number" name="listing[price]" id="price" value="<%= listing.price %>" required>
+    
+    <label for="location">Location:</label>
+    <input type="text" name="listing[location]" id="location" value="<%= listing.location %>" required>
+    
+    <label for="country">Country:</label>
+    <input type="text" name="listing[country]" id="country" value="<%= listing.country %>" required>
+    
+    <button type="submit">Update Listing</button>
+  </form>
+</div>
+
+<footer>
+  &copy; 2025 WanderLust | <a href="/">Back to Home</a>
+</footer>
+
+</body>
+</html>
